@@ -1,0 +1,122 @@
+# bind "'" run "tmux-neww-run.sh open-note.sh 1>/dev/null 2>/dev/null &"
+# bind -n C-M-w neww -n "ws document..." "tmux-ws-document.sh"
+# Works fine -- doesn't freeze
+# bind -n M-, neww -n 'run-command' "get-notes-commands.sh | fzf-nopreview --sort --sync | xargs tmux-run-hist-command.sh"
+# For too easy to hit
+# M-BSpace is delete word. I can't use this.
+# bind -n M-BSpace neww -n "recent..." "tmux-neww-run.sh tmux-recent.sh"
+# bind -n C-M-f neww -n "recent..." "tmux-neww-run.sh tmux-recent.sh"
+
+# I'm not using C-M-f atm so use it.
+# bind -n C-M-f run 'tmux-jump-v2.sh'
+# bind B neww -d 'big-xterm-session.sh'
+
+# bind M-F1 send-keys M-F1
+
+# this binding is used by emacs' regex search.
+#bind -n M-C-s neww -n "edit-fs-notes..." "tmux-fs-notes.sh \"$(pwd)\""
+
+#bind M-k run "exec tmux-zsh-rec.sh"
+#bind M-u run "exec tmux-zsh-view-recs.sh"
+
+#bind P neww -n notes.org "exec tmux-postits-emacsclient.sh"
+#bind P splitw -h -p 38 "tmux-postits-emacsclient.sh; tmux kill-pane \"$TMUX_PANE\""
+#bind E neww -n notes.txt "exec tmux-postits.sh"
+#bind '#' neww "exec tmux-scratch.sh"
+#bind @ neww "exec tmux-glossary.sh"
+#bind E splitw -h -p 38 "exec tmux-postits.sh"
+#bind t set -gq status on
+
+# Do it this way from now on "get-tmux-from-pid.sh $$ | awk '{print $2}' | vim -"
+# this works find but I never use it anymore so i'll replace with
+# something better
+#bind t run "tmux display-message -p '#{session_name}' | xargs tmux-omni-session-from-session.sh"
+
+#bind e run "tmux-respawn-pane.sh"
+#bind e run "tmux-clear-respawn.sh"
+#bind / command-prompt -p man "split-window \"exec man %%\""
+#bind / neww -n ref "tmux-reference-select.sh"
+#bind ^ command-prompt -p session_name "neww -n \"%1\" \"if [ ! -z \\\"%1\\\" ]; then unset TMUX;tmux attach -t \\\"%1\\\" || tmux new -s \\\"%1\\\"; set -t %1 status-right \\\"\\\"; fi\""
+# why does this crash new version of tmux?
+#bind * command-prompt -p ssh_target -I '' "set set-remain-on-exit on; neww -n '%1' \"ssh %1\"; set set-remain-on-exit off"
+# 〃
+#bind * command-prompt -p ssh_target -I '' "zsh"
+# because -I can't take an empty string
+
+#bind M-p run 'tmux-pipe-pane-full.sh'
+#bind M-p pipe-pane -o "ssh -o ControlPath=/dev/null zee 'ncat -k -l 8458'"
+# rearrange windows
+#bind -n C-S-Left swap-window -t -1
+#bind -n C-S-Right swap-window -t +1
+
+# bind M-f run "tmux display-message -p '#{session_name}' | xargs find-window-from-session.sh"
+
+# instead of the following, use a nested tmux and stty columns 81
+#bind M-j run 'tmux-jira.sh; tmux setw -q force-width 81'
+#bind M-j run 'tmux-jira.sh'
+#
+#bind M-v command-prompt -p "copy to:" "run 'tmux-send-remote.sh %1'"
+# tmux → xclip
+#bind v run "tmux-send-xclip.sh"
+# bind '[' run "tm cm"
+#bind M-w run "tmux display-message -p '#{session_name}:#{window_name}' | xargs tmux-run-command-from-file-from-session.sh"
+#
+# xclip → tmux
+#
+#bind M-g splitw -d -h "vim -R /home/shane/ws/dvorak/german/dvorak-german.txt"
+#bind M-m splitw -d -h "vim -R /home/shane/ws/colemak/colemak.txt"
+#bind c run "tmux-receive-xclip.sh"
+#
+# Just paste it! Don't open vim.
+#bind -n M-F3 run "tmux-paste-xclip-chomp.sh"
+#
+#bind Enter run "tmux-vim-xclip.sh"
+#bind C-r run "tmux-vim-xclip.sh"
+# -t sessionname:0.4 -k 'some -new command'
+# This is horrible!
+#bind Z respawn-pane -k "tmux-vim-xclip.sh"
+#
+# bind -n A-Return status
+#bind F run "tmux-ff.sh"
+# bind F neww -n find-subsession "tmux-find.sh"
+#bind F neww -n find-content "printf -- \"%s\\n\" \"tmux-find-content.sh error\" | rtcmd"
+#
+#bind O neww -n find-content "printf -- \"%s\\n\" \"search-recent-files-for-something.sh fs\" | rtcmd"
+#bind F command-prompt "find-window '%%'"
+# using xargs means no race conditions for session_name
+# 
+# Need to make a help binding that does different things depending on
+# what is running in the current pane.
+#bind M-/ neww -n vim-maps "vim-show-maps.sh"
+#bind M-/ command-prompt -p vimhelp "new-window -n vimhelp-%1 \"exec vimhelp %1\""
+#
+#
+# Doesn't like commands that had \" in them.
+#bind + run "tmux neww \"$(tmux display-message -p '#{pane_start_command}')\""
+#bind g set -gq status off
+#bind g run "exec tmux-attach-mirror.sh" # this thing has been driving me insane
+#bind -n C-M-m neww -n "autotest-menu" "autotest-menu.sh"
+# This is S-F2 in putty and xterm. Keep it disabled because I want
+# to be able to easily change from dvorak to querty.
+#bind -n F14 neww -n "ff-slmenu" "ff-slmenu"
+    # F14 is actually run by pressing Command-Shift-F and xmonad sends
+    # an F14 (S-F2)
+    #
+    #
+# tmux-neww-run.sh
+#     Whenever I use this, I must have a & inside of tmux.conf anyway or it will cause a hang
+# bind "'" run "tmux-neww-run.sh 'find-and-vim-path-from-notes.sh' 1>/dev/null 2>/dev/null &"
+
+#bind C linkw -d -t localhost_current: \; selectw -t 1
+# can't use run because then I don't get TMUX_PANE
+#bind C neww -d 'small-xterm-session.sh & disown; sleep 1'
+
+#bind * run 'tmux-rename-window-to-current-command.sh'
+#
+# tmux-neww-run.sh
+#     Whenever I use this, I must have a & inside of tmux.conf anyway or it will cause a hang
+#bind C linkw -d -t localhost_current: \; selectw -t 1
+# can't use run because then I don't get TMUX_PANE
+#bind C neww -d 'small-xterm-session.sh & disown; sleep 1'
+#bind * run 'tmux-rename-window-to-current-command.sh'
+
