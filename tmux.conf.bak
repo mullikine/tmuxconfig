@@ -120,3 +120,9 @@
 #bind C neww -d 'small-xterm-session.sh & disown; sleep 1'
 #bind * run 'tmux-rename-window-to-current-command.sh'
 
+# This is no ranger doesn't segfault.
+# splitw is too fast on its own. I need a small wait.
+# Actually, the problem is that ranger can't be split while it's
+# generating the preview list. It's nothing to do with this.
+# Will trapping SIGWINCH in scope.sh fix this?
+# This makes the problem slightly better anyway
