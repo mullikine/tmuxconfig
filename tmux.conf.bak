@@ -126,3 +126,19 @@
 # generating the preview list. It's nothing to do with this.
 # Will trapping SIGWINCH in scope.sh fix this?
 # This makes the problem slightly better anyway
+#
+#
+# run -b is required to prevent xclip from hanging
+# unfortunately, xclip is still hanging. i'm not sure if this used to
+# happen with neww or not
+# bind i display-message "copied session name: #{session_name}:" \; run -b 'tmux-copy-session-name.sh'
+#bind I display-message "copied pane name: #{session_name}:#{window_name}.#{pane_index}" \; run -b 'tmux-copy-pane-name.sh'
+#
+#
+#set -g history-limit 500
+# Have to hope that the glibc memory leak is fixed
+#set -g history-limit 999999999
+# reduced this incase the reason I'm getting terminal lag is because of this.
+#set -g history-limit 10
+#
+# bind f run "tmux display-message -p '#{session_name}' | tm find-window-from-session -no-activate"
