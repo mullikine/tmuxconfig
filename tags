@@ -4,3 +4,24 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+bind	tmux.conf	/^bind : last-pane$/;"	k
+bind	tmux.conf	/^bind = run 'tm lw'$/;"	k
+filter is localhost	tmux.conf	/^bind -n C-M-w run "tm scrape-filter" # scrape-filter is localhost: only. I need a pane-only one.$/;"	k
+t	tmux.conf	/^bind -n MouseDown1Pane select-pane -t=\\; send-keys -M$/;"	k
+t	tmux.conf	/^bind -r o select-pane -t :.+$/;"	k
+t	tmux.conf	/^bind 0 selectw -t :10 \\; refresh$/;"	k
+t	tmux.conf	/^bind 1 selectw -t :1 \\; refresh$/;"	k
+t	tmux.conf	/^bind 2 selectw -t :2 \\; refresh$/;"	k
+t	tmux.conf	/^bind 3 selectw -t :3 \\; refresh$/;"	k
+t	tmux.conf	/^bind 4 selectw -t :4 \\; refresh$/;"	k
+t	tmux.conf	/^bind 5 selectw -t :5 \\; refresh$/;"	k
+t	tmux.conf	/^bind 6 selectw -t :6 \\; refresh$/;"	k
+t	tmux.conf	/^bind 7 selectw -t :7 \\; refresh$/;"	k
+t	tmux.conf	/^bind 8 selectw -t :8 \\; refresh$/;"	k
+t	tmux.conf	/^bind 9 selectw -t :9 \\; refresh$/;"	k
+tm sel localhost	tmux.conf	/^bind '#' run -b "tm sel localhost:templates.sh"$/;"	k
+tm sel localhost	tmux.conf	/^bind -n M-F11 run -b "tm sel localhost:bpython3"$/;"	k
+tm sel localhost	tmux.conf	/^bind @ run -b "tm sel localhost:glossary"$/;"	k
+tm sel localhost	tmux.conf	/^bind B run -b "tm sel localhost:bpython3"$/;"	k
+tm sel localhost_ws_google	tmux.conf	/^bind g run -b "tm sel localhost_ws_google:google.txt || unbuffer nw orspv $NOTES\/google.org"$/;"	k
+warning	tmux.conf	/^bind W command-prompt -I 'Be careful ' -p 'warning:' "neww -n 'Warning' \\"echo '%1'|less\\"; se/;"	k
